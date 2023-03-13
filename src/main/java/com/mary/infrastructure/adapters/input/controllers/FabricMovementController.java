@@ -23,12 +23,12 @@ public class FabricMovementController {
 
     private final SaveFabricMovement saveFabricMovement;
 
-    @GetMapping("/movements")
-    public ResponseEntity<List<FabricMovementDto>> getAllFabricMovements() {
-        return ResponseEntity.ok(mapToDtoList(this.getAllFabricMovements.execute()));
+    @GetMapping("/{fabricId}/movements")
+    public ResponseEntity<List<FabricMovementDto>> getAllFabricMovements(@PathVariable Long fabricId) {
+        return ResponseEntity.ok(mapToDtoList(this.getAllFabricMovements.execute(new Fabric_Id(fabricId))));
     }
 
-    @GetMapping("/{fabricId}/movements/g")
+    @GetMapping("/{fabricId}/movements/stock")
     public ResponseEntity<Integer> getFabricStock(@PathVariable Long fabricId) {
         return ResponseEntity.ok(this.getFabricStock.execute(new Fabric_Id(fabricId)));
     }
